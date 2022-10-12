@@ -1,7 +1,10 @@
 <p>
-  {{ nameField.value }}
-  Name: {{ nameField.value }} {{ nameField.valid }}
-  <input type="text" [formControl]="nameField" />
+  Name: {{ nameField.valid }}
+  <input
+  [class.is-valid]="isNameFieldValid"
+  [class.is-invalid]="isNameFieldInvalid"
+  type="text"
+  [formControl]="nameField" />
   <button [disabled]="nameField.invalid" (click)="getNameValue()">Get value</button>
   <!-- <code>
     <pre>
@@ -12,12 +15,28 @@
 </p>
 
 <p>
-  <strong *ngIf="nameField.touched && nameField.hasError('required')">Este campo es requerido</strong>
+  Newsletter {{ newsLetterField.valid }}
+  <input [class.is-valid]="isNewsLetterFieldValid" [class.is-invalid]="isNewsLetterFieldInvalid" type="email" [formControl]="newsLetterField" >
 </p>
 
-<p>
-  <strong *ngIf="nameField.touched && nameField.hasError('maxlength')">Este campo debe tener máximo 10 caracteres</strong>
-</p>
+<div>
+
+  <p class="messages" [class.active]="isNewsLetterFieldInvalid">
+    <strong *ngIf="newsLetterField.touched && newsLetterField.hasError('required')">Este campo es requerido</strong>
+    <strong *ngIf="newsLetterField.touched && newsLetterField.hasError('email')">Este campo debe ser un email</strong>
+  </p>
+
+  <p class="messages" [class.active]="isNameFieldInvalid">
+    <strong *ngIf="nameField.touched && nameField.hasError('required')">Este campo es requerido</strong>
+  </p>
+
+  <p >
+    <strong *ngIf="nameField.touched && nameField.hasError('maxlength')">Este campo debe tener máximo 10 caracteres</strong>
+  </p>
+
+</div>
+
+
 
 <p>
   Email: {{ emailField.value }}

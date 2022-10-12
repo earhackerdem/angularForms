@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators} from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-basic-form',
@@ -8,7 +8,7 @@ import { FormControl, Validators} from '@angular/forms';
 })
 export class BasicFormComponent implements OnInit {
 
-  nameField = new FormControl('',[Validators.required,Validators.maxLength(10)],[]);
+  nameField = new FormControl('', [Validators.required, Validators.maxLength(10)], []);
   emailField = new FormControl('');
   phoneField = new FormControl('');
   colorField = new FormControl('#000000');
@@ -22,17 +22,33 @@ export class BasicFormComponent implements OnInit {
   genderField = new FormControl('')
   zoneField = new FormControl('');
   preferencesField = new FormControl('');
-
+  newsLetterField = new FormControl('',[Validators.required, Validators.email]);
 
   constructor() { }
 
   ngOnInit(): void {
     this.nameField.valueChanges
-    .subscribe( value => console.log(value))
+      .subscribe(value => console.log(value))
   }
 
-  getNameValue(){
+  getNameValue() {
     console.log(this.nameField.value);
+  }
+
+  get isNameFieldValid() {
+    return this.nameField.touched && this.nameField.valid;
+  }
+
+  get isNameFieldInvalid() {
+    return this.nameField.touched && this.nameField.invalid;
+  }
+
+  get isNewsLetterFieldValid(){
+    return this.newsLetterField.touched && this.newsLetterField.valid;
+  }
+
+  get isNewsLetterFieldInvalid(){
+    return this.newsLetterField.touched && this.newsLetterField.invalid;
   }
 
 }
