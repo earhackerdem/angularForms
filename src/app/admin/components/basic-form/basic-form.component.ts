@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-basic-form',
@@ -8,21 +8,22 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class BasicFormComponent implements OnInit {
 
-  nameField = new FormControl('', [Validators.required, Validators.maxLength(10)], []);
-  emailField = new FormControl('');
-  phoneField = new FormControl('');
-  colorField = new FormControl('#000000');
-  dateField = new FormControl('');
-  ageField = new FormControl('');
+  form = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.maxLength(10)], []),
+    email:new FormControl(''),
+    phone:new FormControl(''),
+    color: new FormControl('#000000'),
+    date: new FormControl(''),
+    age: new FormControl(25),
+    category: new FormControl('category-2'),
+    tag:new FormControl(''),
+    agree:new FormControl(false),
+    gender:new FormControl(''),
+    zone:new FormControl(''),
+    preferences:new FormControl(''),
+    newsLetter: new FormControl('',[Validators.required, Validators.email])
 
-  categoryField = new FormControl('category-2');
-  tagField = new FormControl('');
-
-  agreeField = new FormControl(false);
-  genderField = new FormControl('')
-  zoneField = new FormControl('');
-  preferencesField = new FormControl('');
-  newsLetterField = new FormControl('',[Validators.required, Validators.email]);
+  });
 
   constructor() { }
 
@@ -33,6 +34,58 @@ export class BasicFormComponent implements OnInit {
 
   getNameValue() {
     console.log(this.nameField.value);
+  }
+
+  get nameField(){
+    return this.form.get('name');
+  }
+
+  get emailField(){
+    return this.form.get('email');
+  }
+
+  get phoneField(){
+    return this.form.get('phone');
+  }
+
+  get colorField(){
+    return this.form.get('color');
+  }
+
+  get dateField(){
+    return this.form.get('date');
+  }
+
+  get ageField(){
+    return this.form.get('age');
+  }
+
+  get categoryField(){
+    return this.form.get('category');
+  }
+
+  get tagField(){
+    return this.form.get('tag');
+  }
+
+  get agreeField(){
+    return this.form.get('agree');
+  }
+
+  get genderField(){
+    return this.form.get('gender');
+  }
+
+  get zoneField(){
+    return this.form.get('zone');
+  }
+
+  get preferencesField(){
+    return this.form.get('preferences');
+  }
+
+  get newsLetterField(){
+    return this.form.get('newsLetter');
   }
 
   get isNameFieldValid() {
@@ -49,6 +102,10 @@ export class BasicFormComponent implements OnInit {
 
   get isNewsLetterFieldInvalid(){
     return this.newsLetterField.touched && this.newsLetterField.invalid;
+  }
+
+  save(){
+    console.log(this.form.value)
   }
 
 }

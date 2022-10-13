@@ -1,151 +1,185 @@
-<p>
-  Name: {{ nameField.valid }}
-  <input
-  [class.is-valid]="isNameFieldValid"
-  [class.is-invalid]="isNameFieldInvalid"
-  type="text"
-  [formControl]="nameField" />
-  <button [disabled]="nameField.invalid" (click)="getNameValue()">Get value</button>
-  <!-- <code>
-    <pre>
-   {{ nameField | json }}
-  </pre
-    >
-  </code> -->
-</p>
-
-<p>
-  Newsletter {{ newsLetterField.valid }}
-  <input [class.is-valid]="isNewsLetterFieldValid" [class.is-invalid]="isNewsLetterFieldInvalid" type="email" [formControl]="newsLetterField" >
-</p>
-
-<div>
-
-  <p class="messages" [class.active]="isNewsLetterFieldInvalid">
-    <strong *ngIf="newsLetterField.touched && newsLetterField.hasError('required')">Este campo es requerido</strong>
-    <strong *ngIf="newsLetterField.touched && newsLetterField.hasError('email')">Este campo debe ser un email</strong>
+<form [formGroup]="form" (ngSubmit)="save()" >
+  <p>
+    Name: {{ nameField.valid }}
+    <input
+      [class.is-valid]="isNameFieldValid"
+      [class.is-invalid]="isNameFieldInvalid"
+      type="text"
+      formControlName="name"
+    />
+    <button [disabled]="nameField.invalid" (click)="getNameValue()">
+      Get value
+    </button>
+    <!-- <code>
+      <pre>
+     {{ nameField | json }}
+    </pre
+      >
+    </code> -->
   </p>
 
-  <p class="messages" [class.active]="isNameFieldInvalid">
-    <strong *ngIf="nameField.touched && nameField.hasError('required')">Este campo es requerido</strong>
+  <p>
+    Newsletter {{ newsLetterField.valid }}
+    <input
+      [class.is-valid]="isNewsLetterFieldValid"
+      [class.is-invalid]="isNewsLetterFieldInvalid"
+      type="email"
+      formControlName="newsLetter"
+    />
   </p>
 
-  <p >
-    <strong *ngIf="nameField.touched && nameField.hasError('maxlength')">Este campo debe tener máximo 10 caracteres</strong>
+  <div>
+    <p class="messages" [class.active]="isNewsLetterFieldInvalid">
+      <strong
+        *ngIf="newsLetterField.touched && newsLetterField.hasError('required')"
+        >Este campo es requerido</strong
+      >
+      <strong
+        *ngIf="newsLetterField.touched && newsLetterField.hasError('email')"
+        >Este campo debe ser un email</strong
+      >
+    </p>
+
+    <p class="messages" [class.active]="isNameFieldInvalid">
+      <strong *ngIf="nameField.touched && nameField.hasError('required')"
+        >Este campo es requerido</strong
+      >
+    </p>
+
+    <p>
+      <strong *ngIf="nameField.touched && nameField.hasError('maxlength')"
+        >Este campo debe tener máximo 10 caracteres</strong
+      >
+    </p>
+  </div>
+
+  <p>
+    Email: {{ emailField.value }}
+    <input type="email" formControlName="email" />
   </p>
 
-</div>
+  <p>
+    Phone: {{ phoneField.value }}
+    <input type="tel" formControlName="phone" />
+  </p>
 
+  <p>
+    Color: {{ colorField.value }}
+    <input type="color" formControlName="color" />
+  </p>
 
+  <p>
+    Fecha: {{ dateField.value }}
+    <input type="date" formControlName="date" />
+  </p>
+  <p>
+    Number: {{ ageField.value }}
+    <input type="number" formControlName="age" />
+  </p>
 
-<p>
-  Email: {{ emailField.value }}
-  <input type="email" [formControl]="emailField" />
-</p>
+  <p>
+    Category: {{ categoryField.value }}
+    <select formControlName="category">
+      <option value="category-1">Category 1</option>
+      <option value="category-2">Category 2</option>
+      <option value="category-3">Category 3</option>
+      <option value="category-4">Category 4</option>
+    </select>
+  </p>
 
-<p>
-  Phone: {{ phoneField.value }}
-  <input type="tel" [formControl]="phoneField" />
-</p>
+  <p>
+    Tags: {{ tagField.value }}
+    <select formControlName="tag" multiple>
+      <option value="tag-1">Tag 1</option>
+      <option value="tag-2">Tag 2</option>
+      <option value="tag-3">Tag 3</option>
+      <option value="tag-4">Tag 4</option>
+    </select>
+  </p>
 
-<p>
-  Color: {{ colorField.value }}
-  <input type="color" [formControl]="colorField" />
-</p>
+  <p>
+    Tags: {{ agreeField.value }}
+    <input type="checkbox" formControlName="agree" />
+  </p>
 
-<p>
-  Fecha: {{ dateField.value }}
-  <input type="date" [formControl]="dateField" />
-</p>
-<p>
-  Number: {{ ageField.value }}
-  <input type="number" [formControl]="ageField" />
-</p>
+  <p>
+    Gender: {{ genderField.value }}
+    <label>
+      <input
+        name="gender"
+        type="radio"
+        value="male"
+        formControlName="gender"
+      />
+      Male
+    </label>
+    <label>
+      <input
+        name="gender"
+        type="radio"
+        value="female"
+        formControlName="gender"
+      />
+      Female
+    </label>
+    <label>
+      <input
+        name="gender"
+        type="radio"
+        value="other"
+        formControlName="gender"
+      />
+      Other
+    </label>
+  </p>
 
-<p>
-  Category: {{ categoryField.value }}
-  <select [formControl]="categoryField">
-    <option value="category-1">Category 1</option>
-    <option value="category-2">Category 2</option>
-    <option value="category-3">Category 3</option>
-    <option value="category-4">Category 4</option>
-  </select>
-</p>
+  <p>
+    Zone: {{ zoneField.value }}
+    <label>
+      <input
+        name="zone"
+        type="radio"
+        value="zone-1"
+        formControlName="zone"
+      />
+      Zona 1
+    </label>
+    <label>
+      <input
+        name="zone"
+        type="radio"
+        value="zone-2"
+        formControlName="zone"
+      />
+      Zona 2
+    </label>
+    <label>
+      <input
+        name="zone"
+        type="radio"
+        value="zone-3"
+        formControlName="zone"
+      />
+      Zona 3
+    </label>
+  </p>
 
-<p>
-  Tags: {{ tagField.value }}
-  <select [formControl]="tagField" multiple>
-    <option value="tag-1">Tag 1</option>
-    <option value="tag-2">Tag 2</option>
-    <option value="tag-3">Tag 3</option>
-    <option value="tag-4">Tag 4</option>
-  </select>
-</p>
+  <button type="submit" [disabled]="form.invalid" >Enviar</button>
 
-<p>
-  Tags: {{ agreeField.value }}
-  <input type="checkbox" [formControl]="agreeField" />
-</p>
-
-<p>
-  Gender: {{ genderField.value }}
-  <label>
-    <input
-      name="gender"
-      type="radio"
-      value="male"
-      [formControl]="genderField"
-    />
-    Male
-  </label>
-  <label>
-    <input
-      name="gender"
-      type="radio"
-      value="female"
-      [formControl]="genderField"
-    />
-    Female
-  </label>
-  <label>
-    <input
-      name="gender"
-      type="radio"
-      value="other"
-      [formControl]="genderField"
-    />
-    Other
-  </label>
-</p>
-
-<p>
-  Zone: {{ zoneField.value }}
-  <label>
-    <input name="zone" type="radio" value="zone-1" [formControl]="zoneField" />
-    Zona 1
-  </label>
-  <label>
-    <input name="zone" type="radio" value="zone-2" [formControl]="zoneField" />
-    Zona 2
-  </label>
-  <label>
-    <input name="zone" type="radio" value="zone-3" [formControl]="zoneField" />
-    Zona 3
-  </label>
-</p>
+</form>
 
 <!-- <p>
   Preferences: {{ preferencesField.value }}
   <label>
-    <input type="checkbox" name="preferences" value="technologies" [formControl]="preferencesField" />
+    <input type="checkbox" name="preferences" value="technologies" formControlName="preferencesField" />
     Tecnologías
   </label>
   <label>
-    <input type="checkbox" name="preferences" value="technologies" [formControl]="preferencesField" />
+    <input type="checkbox" name="preferences" value="technologies" formControlName="preferencesField" />
     Ciencia
   </label>
   <label>
-    <input type="checkbox" name="preferences" value="technologies" [formControl]="preferencesField" />
+    <input type="checkbox" name="preferences" value="technologies" formControlName="preferencesField" />
     Moda
   </label>
 </p> -->
