@@ -1,30 +1,57 @@
-<form [formGroup]="form" (ngSubmit)="save()">
-  <p>
-    Name: {{ nameField.valid }}
-    <input
-      [class.is-valid]="isNameFieldValid"
-      [class.is-invalid]="isNameFieldInvalid"
-      type="text"
-      formControlName="name"
-    />
-    <button [disabled]="nameField.invalid" (click)="getNameValue()">
-      Get value
-    </button>
-    <!-- <code>
-      <pre>
-     {{ nameField | json }}
-    </pre
-      >
-    </code> -->
-  </p>
+<form [formGroup]="form" (ngSubmit)="save($event)">
+  <div formGroupName="fullName">
+    <p>
+      Name: {{ nameField.valid }}
+      <input
+        [class.is-valid]="isNameFieldValid"
+        [class.is-invalid]="isNameFieldInvalid"
+        type="text"
+        formControlName="name"
+      />
+      <button [disabled]="nameField.invalid" (click)="getNameValue()">
+        Get value
+      </button>
+      <!-- <code>
+        <pre>
+       {{ nameField | json }}
+      </pre
+        >
+      </code> -->
+    </p>
 
-  <div class="messages" [class.active]="isNameFieldInvalid">
+    <div class="messages" [class.active]="isNameFieldInvalid">
+      <p>
+        <strong *ngIf="nameField.hasError('required')"
+          >Este campo es requerido</strong
+        >
+      </p>
+      <p>
+        <strong *ngIf="nameField.hasError('pattern')"
+          >No debe tener caracteres especiales</strong
+        >
+      </p>
+    </div>
+
+    <!-- last name -->
+
     <p>
-      <strong *ngIf="nameField.hasError('required')">Este campo es requerido</strong>
+      Last name: {{ lastNameField.valid }}
+      <input type="text" formControlName="lastName"/>
     </p>
-    <p>
-      <strong *ngIf="nameField.hasError('pattern')">No debe tener caracteres especiales</strong>
-    </p>
+
+    <div class="messages" [class.active]="isLastNameFieldInvalid">
+      <p>
+        <strong *ngIf="lastNameField.hasError('required')"
+          >Este campo es requerido</strong
+        >
+      </p>
+      <p>
+        <strong *ngIf="lastNameField.hasError('pattern')"
+          >No debe tener caracteres especiales</strong
+        >
+      </p>
+    </div>
+
   </div>
 
   <p>
