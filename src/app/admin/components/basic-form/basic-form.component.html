@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="save()" >
+<form [formGroup]="form" (ngSubmit)="save()">
   <p>
     Name: {{ nameField.valid }}
     <input
@@ -63,6 +63,14 @@
     <input type="tel" formControlName="phone" />
   </p>
 
+  <div class="messages" [class.active]="isPhoneFieldInvalid">
+    <p>
+      <strong *ngIf="phoneField.touched && phoneField.hasError('required')">
+        Este campo es requerido
+      </strong>
+    </p>
+  </div>
+
   <p>
     Color: {{ colorField.value }}
     <input type="color" formControlName="color" />
@@ -105,12 +113,7 @@
   <p>
     Gender: {{ genderField.value }}
     <label>
-      <input
-        name="gender"
-        type="radio"
-        value="male"
-        formControlName="gender"
-      />
+      <input name="gender" type="radio" value="male" formControlName="gender" />
       Male
     </label>
     <label>
@@ -136,36 +139,20 @@
   <p>
     Zone: {{ zoneField.value }}
     <label>
-      <input
-        name="zone"
-        type="radio"
-        value="zone-1"
-        formControlName="zone"
-      />
+      <input name="zone" type="radio" value="zone-1" formControlName="zone" />
       Zona 1
     </label>
     <label>
-      <input
-        name="zone"
-        type="radio"
-        value="zone-2"
-        formControlName="zone"
-      />
+      <input name="zone" type="radio" value="zone-2" formControlName="zone" />
       Zona 2
     </label>
     <label>
-      <input
-        name="zone"
-        type="radio"
-        value="zone-3"
-        formControlName="zone"
-      />
+      <input name="zone" type="radio" value="zone-3" formControlName="zone" />
       Zona 3
     </label>
   </p>
 
-  <button type="submit" [disabled]="form.invalid" >Enviar</button>
-
+  <button type="submit">Enviar</button>
 </form>
 
 <!-- <p>

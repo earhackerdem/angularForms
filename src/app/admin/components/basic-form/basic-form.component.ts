@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-basic-form',
@@ -8,83 +8,72 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 })
 export class BasicFormComponent implements OnInit {
 
-  form = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.maxLength(10)], []),
-    email:new FormControl(''),
-    phone:new FormControl(''),
-    color: new FormControl('#000000'),
-    date: new FormControl(''),
-    age: new FormControl(25),
-    category: new FormControl('category-2'),
-    tag:new FormControl(''),
-    agree:new FormControl(false),
-    gender:new FormControl(''),
-    zone:new FormControl(''),
-    preferences:new FormControl(''),
-    newsLetter: new FormControl('',[Validators.required, Validators.email])
+  form: FormGroup;
 
-  });
-
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) {
+    this.buildForm();
+  }
 
   ngOnInit(): void {
     this.nameField.valueChanges
-      .subscribe(value => console.log(value))
+      .subscribe(value => console.log(value));
+    this.form.valueChanges
+    .subscribe(value => console.log(value));
   }
 
   getNameValue() {
     console.log(this.nameField.value);
   }
 
-  get nameField(){
+  get nameField() {
     return this.form.get('name');
   }
 
-  get emailField(){
+  get emailField() {
     return this.form.get('email');
   }
 
-  get phoneField(){
+  get phoneField() {
     return this.form.get('phone');
   }
 
-  get colorField(){
+  get colorField() {
     return this.form.get('color');
   }
 
-  get dateField(){
+  get dateField() {
     return this.form.get('date');
   }
 
-  get ageField(){
+  get ageField() {
     return this.form.get('age');
   }
 
-  get categoryField(){
+  get categoryField() {
     return this.form.get('category');
   }
 
-  get tagField(){
+  get tagField() {
     return this.form.get('tag');
   }
 
-  get agreeField(){
+  get agreeField() {
     return this.form.get('agree');
   }
 
-  get genderField(){
+  get genderField() {
     return this.form.get('gender');
   }
 
-  get zoneField(){
+  get zoneField() {
     return this.form.get('zone');
   }
 
-  get preferencesField(){
+  get preferencesField() {
     return this.form.get('preferences');
   }
 
-  get newsLetterField(){
+  get newsLetterField() {
     return this.form.get('newsLetter');
   }
 
@@ -96,16 +85,44 @@ export class BasicFormComponent implements OnInit {
     return this.nameField.touched && this.nameField.invalid;
   }
 
-  get isNewsLetterFieldValid(){
+  get isNewsLetterFieldValid() {
     return this.newsLetterField.touched && this.newsLetterField.valid;
   }
 
-  get isNewsLetterFieldInvalid(){
+  get isNewsLetterFieldInvalid() {
     return this.newsLetterField.touched && this.newsLetterField.invalid;
   }
 
-  save(){
-    console.log(this.form.value)
+  get isPhoneFieldInvalid() {
+    return this.phoneField.touched && this.phoneField.invalid;
+  }
+
+  save() {
+    if (this.form.valid) {
+      console.log(this.form.value)
+    } else {
+      this.form.markAllAsTouched();
+    }
+
+  }
+
+  private buildForm() {
+    this.form = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.maxLength(10)], []],
+      email: ['', Validators.required],
+      phone: ['',Validators.required],
+      color: ['#000000'],
+      date: [''],
+      age: [25],
+      category: ['category-2'],
+      tag: [''],
+      agree: [false],
+      gender: [''],
+      zone: [''],
+      preferences: [''],
+      newsLetter: ['', [Validators.required, Validators.email]]
+
+    });
   }
 
 }
