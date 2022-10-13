@@ -18,7 +18,7 @@ export class BasicFormComponent implements OnInit {
     this.nameField.valueChanges
       .subscribe(value => console.log(value));
     this.form.valueChanges
-    .subscribe(value => console.log(value));
+      .subscribe(value => console.log(value));
   }
 
   getNameValue() {
@@ -97,6 +97,14 @@ export class BasicFormComponent implements OnInit {
     return this.phoneField.touched && this.phoneField.invalid;
   }
 
+  get isEmailFieldInvalid() {
+    return this.emailField.touched && this.emailField.invalid;
+  }
+
+  get isAgeFieldInvalid() {
+    return this.ageField.touched && this.ageField.invalid;
+  }
+
   save() {
     if (this.form.valid) {
       console.log(this.form.value)
@@ -108,15 +116,15 @@ export class BasicFormComponent implements OnInit {
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.maxLength(10)], []],
-      email: ['', Validators.required],
-      phone: ['',Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)], []],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required],
       color: ['#000000'],
       date: [''],
-      age: [25],
+      age: [25, [Validators.required, Validators.min(18), Validators.max(100)]],
       category: ['category-2'],
       tag: [''],
-      agree: [false],
+      agree: [false, [Validators.requiredTrue]],
       gender: [''],
       zone: [''],
       preferences: [''],
