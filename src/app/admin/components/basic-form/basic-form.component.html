@@ -1,223 +1,188 @@
 <form [formGroup]="form" (ngSubmit)="save($event)">
+  <!-- group name -->
+
   <div formGroupName="fullName">
-    <p>
-      Name: {{ nameField.valid }}
-      <input
-        [class.is-valid]="isNameFieldValid"
-        [class.is-invalid]="isNameFieldInvalid"
-        type="text"
-        formControlName="name"
-      />
-      <button [disabled]="nameField.invalid" (click)="getNameValue()">
-        Get value
-      </button>
-      <!-- <code>
-        <pre>
-       {{ nameField | json }}
-      </pre
-        >
-      </code> -->
-    </p>
+    <!-- name -->
+    <mat-form-field appearance="fill">
+      <mat-label> Name:</mat-label>
+      <input matInput type="text" formControlName="name" />
+      <mat-icon matSuffix *ngIf="isNameFieldValid">done</mat-icon>
+      <mat-icon matSuffix *ngIf="isNameFieldInvalid">close</mat-icon>
+    </mat-form-field>
 
     <div class="messages" [class.active]="isNameFieldInvalid">
-      <p>
-        <strong *ngIf="nameField.hasError('required')"
-          >Este campo es requerido</strong
-        >
-      </p>
-      <p>
-        <strong *ngIf="nameField.hasError('pattern')"
-          >No debe tener caracteres especiales</strong
-        >
-      </p>
+      <mat-error *ngIf="nameField.hasError('required')"
+        >Este campo es requerido</mat-error
+      >
+      <mat-error *ngIf="nameField.hasError('pattern')"
+        >No debe tener caracteres especiales</mat-error
+      >
+      <mat-error *ngIf="nameField.hasError('maxlength')"
+        >Este campo debe tener máximo 10 caracteres</mat-error
+      >
     </div>
 
     <!-- last name -->
-
-    <p>
-      Last name: {{ lastNameField.valid }}
-      <input type="text" formControlName="lastName"/>
-    </p>
+    <mat-form-field appearance="fill">
+      <mat-label>Last name:</mat-label>
+      <input matInput type="text" formControlName="lastName" />
+      <mat-icon matSuffix *ngIf="isLastNameFieldValid">done</mat-icon>
+      <mat-icon matSuffix *ngIf="isLastNameFieldInvalid">close</mat-icon>
+    </mat-form-field>
 
     <div class="messages" [class.active]="isLastNameFieldInvalid">
-      <p>
-        <strong *ngIf="lastNameField.hasError('required')"
-          >Este campo es requerido</strong
-        >
-      </p>
-      <p>
-        <strong *ngIf="lastNameField.hasError('pattern')"
-          >No debe tener caracteres especiales</strong
-        >
-      </p>
+      <mat-error *ngIf="lastNameField.hasError('required')"
+        >Este campo es requerido</mat-error
+      >
+      <mat-error *ngIf="lastNameField.hasError('pattern')"
+        >No debe tener caracteres especiales</mat-error
+      >
+      <mat-error *ngIf="lastNameField.hasError('maxlength')"
+        >Este campo debe tener máximo 10 caracteres</mat-error
+      >
     </div>
-
   </div>
 
-  <p>
-    Newsletter {{ newsLetterField.valid }}
-    <input
-      [class.is-valid]="isNewsLetterFieldValid"
-      [class.is-invalid]="isNewsLetterFieldInvalid"
-      type="email"
-      formControlName="newsLetter"
-    />
-  </p>
+  <!-- newsletter -->
 
-  <div>
-    <p class="messages" [class.active]="isNewsLetterFieldInvalid">
-      <strong
-        *ngIf="newsLetterField.touched && newsLetterField.hasError('required')"
-        >Este campo es requerido</strong
-      >
-      <strong
-        *ngIf="newsLetterField.touched && newsLetterField.hasError('email')"
-        >Este campo debe ser un email</strong
-      >
-    </p>
+  <mat-form-field appearance="fill">
+    <mat-label>Newsletter</mat-label>
+    <input matInput type="text" formControlName="newsLetter" />
+    <mat-icon matSuffix *ngIf="isNewsLetterFieldValid">done</mat-icon>
+    <mat-icon matSuffix *ngIf="isNewsLetterFieldInvalid">close</mat-icon>
+  </mat-form-field>
 
-    <p>
-      <strong *ngIf="nameField.touched && nameField.hasError('maxlength')"
-        >Este campo debe tener máximo 10 caracteres</strong
-      >
-    </p>
+  <div class="messages" [class.active]="isNewsLetterFieldInvalid">
+    <mat-error *ngIf="newsLetterField.hasError('required')"
+      >Este campo es requerido</mat-error
+    >
+    <mat-error *ngIf="newsLetterField.hasError('email')"
+      >Este campo debe ser un email</mat-error
+    >
+    <mat-error *ngIf="newsLetterField.hasError('maxlength')"
+      >Este campo debe tener máximo 10 caracteres</mat-error
+    >
   </div>
 
-  <p>
-    Email: {{ emailField.value }}
-    <input type="email" formControlName="email" />
-  </p>
+  <!-- email -->
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="email" />
+    <mat-icon matSuffix *ngIf="isEmailFieldValid">done</mat-icon>
+    <mat-icon matSuffix *ngIf="isEmailFieldInvalid">close</mat-icon>
+  </mat-form-field>
 
   <div class="messages" [class.active]="isEmailFieldInvalid">
-    <strong *ngIf="emailField.hasError('required')">
-      Este campo es requerido
-    </strong>
-
-    <strong *ngIf="emailField.hasError('email')">
-      Introduzca un email valido
-    </strong>
+    <mat-error *ngIf="emailField.hasError('required')"
+      >Este campo es requerido</mat-error
+    >
+    <mat-error *ngIf="emailField.hasError('email')"
+      >Introduzca un email valido</mat-error
+    >
   </div>
 
-  <p>
-    Phone: {{ phoneField.value }}
-    <input type="tel" formControlName="phone" />
-  </p>
+  <!-- Phone -->
+
+  <mat-form-field appearance="fill">
+    <mat-label>Phone</mat-label>
+    <input matInput type="tel" formControlName="phone" />
+    <mat-icon matSuffix *ngIf="isPhoneFieldValid">done</mat-icon>
+    <mat-icon matSuffix *ngIf="isPhoneFieldInvalid">close</mat-icon>
+  </mat-form-field>
 
   <div class="messages" [class.active]="isPhoneFieldInvalid">
-    <p>
-      <strong *ngIf="phoneField.touched && phoneField.hasError('required')">
-        Este campo es requerido
-      </strong>
-    </p>
+    <mat-error *ngIf="phoneField.hasError('required')"></mat-error>
   </div>
 
-  <p>
-    Color: {{ colorField.value }}
-    <input type="color" formControlName="color" />
-  </p>
+  <!-- color -->
 
-  <p>
-    Fecha: {{ dateField.value }}
-    <input type="date" formControlName="date" />
-  </p>
-  <p>
-    Number: {{ ageField.value }}
-    <input type="number" formControlName="age" />
-  </p>
+  <mat-form-field appearance="fill">
+    <mat-label>Color</mat-label>
+    <input matInput type="color" formControlName="color" />
+    <mat-icon matSuffix *ngIf="isColorFieldValid">done</mat-icon>
+    <mat-icon matSuffix *ngIf="isColorFieldInvalid">close</mat-icon>
+  </mat-form-field>
+
+  <div class="messages" [class.active]="isColorFieldInvalid">
+    <mat-error *ngIf="colorField.hasError('required')"></mat-error>
+  </div>
+
+  <!-- date -->
+
+  <mat-form-field appearance="fill">
+    <mat-label>Fecha</mat-label>
+    <input matInput formControlName="date" [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+
+  <!-- age -->
+
+  <mat-form-field appearance="fill">
+    <mat-label>Age</mat-label>
+    <input matInput type="number" formControlName="age" />
+    <mat-icon matSuffix *ngIf="isAgeFieldValid">done</mat-icon>
+    <mat-icon matSuffix *ngIf="isAgeFieldInvalid">close</mat-icon>
+  </mat-form-field>
+
   <div class="messages" [class.active]="isAgeFieldInvalid">
-    <p>
-      <strong *ngIf="ageField.hasError('required')">
-        Este campo es requerido
-      </strong>
-      <strong *ngIf="ageField.hasError('min')"> Debe ser mayor de edad </strong>
-      <strong *ngIf="ageField.hasError('max')">
-        No puede ser mayor a 100 años
-      </strong>
-    </p>
+    <mat-error *ngIf="colorField.hasError('required')"
+      >Este campo es requerido</mat-error
+    >
+    <mat-error *ngIf="colorField.hasError('min')"
+      >El usuario debe ser mayor de edad</mat-error
+    >
+    <mat-error *ngIf="colorField.hasError('max')"
+      >El usuario no debe tener mas de 100 años</mat-error
+    >
   </div>
 
-  <p>
-    Category: {{ categoryField.value }}
-    <select formControlName="category">
-      <option value="category-1">Category 1</option>
-      <option value="category-2">Category 2</option>
-      <option value="category-3">Category 3</option>
-      <option value="category-4">Category 4</option>
-    </select>
-  </p>
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select formControlName="category">
+      <mat-option value="category-1">Category 1</mat-option>
+      <mat-option value="category-2">Category 2</mat-option>
+      <mat-option value="category-3">Category 3</mat-option>
+      <mat-option value="category-4">Category 4</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  <p>
-    Tags: {{ tagField.value }}
-    <select formControlName="tag" multiple>
-      <option value="tag-1">Tag 1</option>
-      <option value="tag-2">Tag 2</option>
-      <option value="tag-3">Tag 3</option>
-      <option value="tag-4">Tag 4</option>
-    </select>
-  </p>
 
-  <p>
-    Tags: {{ agreeField.value }}
-    <input type="checkbox" formControlName="agree" />
-  </p>
 
-  <p>
-    Gender: {{ genderField.value }}
-    <label>
-      <input name="gender" type="radio" value="male" formControlName="gender" />
-      Male
-    </label>
-    <label>
-      <input
-        name="gender"
-        type="radio"
-        value="female"
-        formControlName="gender"
-      />
-      Female
-    </label>
-    <label>
-      <input
-        name="gender"
-        type="radio"
-        value="other"
-        formControlName="gender"
-      />
-      Other
-    </label>
-  </p>
+  <mat-form-field appearance="fill">
+    <mat-label>Tags</mat-label>
+    <mat-select formControlName="tag" multiple>
+      <mat-option value="tag-1">Tag 1</mat-option>
+      <mat-option value="tag-2">Tag 2</mat-option>
+      <mat-option value="tag-3">Tag 3</mat-option>
+      <mat-option value="tag-4">Tag 4</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  <p>
-    Zone: {{ zoneField.value }}
-    <label>
-      <input name="zone" type="radio" value="zone-1" formControlName="zone" />
-      Zona 1
-    </label>
-    <label>
-      <input name="zone" type="radio" value="zone-2" formControlName="zone" />
-      Zona 2
-    </label>
-    <label>
-      <input name="zone" type="radio" value="zone-3" formControlName="zone" />
-      Zona 3
-    </label>
-  </p>
+  <section>
+    <mat-checkbox formControlName="agree">Acepto los términos</mat-checkbox>
+  </section>
 
-  <button type="submit">Enviar</button>
+  <section>
+    <label id="genero">Genero</label>
+    <mat-radio-group aria-labelledby="genero" formControlName="gender">
+      <mat-radio-button value="male">Male</mat-radio-button>
+      <mat-radio-button value="female">Female</mat-radio-button>
+      <mat-radio-button value="other">Other</mat-radio-button>
+    </mat-radio-group>
+  </section>
+  <label id="zone">Zona</label>
+  <mat-radio-group aria-labelledby="zone" formControlName="zone">
+    <mat-radio-button value="zone-1">Zona 1</mat-radio-button>
+    <mat-radio-button value="zone-2">Zona 2</mat-radio-button>
+    <mat-radio-button value="zone-3">Zona 3</mat-radio-button>
+  </mat-radio-group>
+
+  <br>
+  <button mat-raised-button color="primary" type="submit">Enviar</button>
 </form>
 
-<!-- <p>
-  Preferences: {{ preferencesField.value }}
-  <label>
-    <input type="checkbox" name="preferences" value="technologies" formControlName="preferencesField" />
-    Tecnologías
-  </label>
-  <label>
-    <input type="checkbox" name="preferences" value="technologies" formControlName="preferencesField" />
-    Ciencia
-  </label>
-  <label>
-    <input type="checkbox" name="preferences" value="technologies" formControlName="preferencesField" />
-    Moda
-  </label>
-</p> -->
+

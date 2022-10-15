@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
-
 @Component({
   selector: 'app-basic-form',
   templateUrl: './basic-form.component.html',
@@ -101,16 +100,40 @@ export class BasicFormComponent implements OnInit {
     return this.phoneField.touched && this.phoneField.invalid;
   }
 
+  get isPhoneFieldValid() {
+    return this.phoneField.touched && this.phoneField.valid;
+  }
+
   get isEmailFieldInvalid() {
     return this.emailField.touched && this.emailField.invalid;
+  }
+
+  get isEmailFieldValid() {
+    return this.emailField.touched && this.emailField.valid;
   }
 
   get isAgeFieldInvalid() {
     return this.ageField.touched && this.ageField.invalid;
   }
 
+  get isAgeFieldValid() {
+    return this.ageField.touched && this.ageField.valid;
+  }
+
   get isLastNameFieldInvalid() {
     return this.lastNameField.touched && this.lastNameField.invalid;
+  }
+
+  get isLastNameFieldValid() {
+    return this.lastNameField.touched && this.lastNameField.valid;
+  }
+
+  get isColorFieldInvalid(){
+    return this.colorField.touched && this.colorField.invalid;
+  }
+
+  get isColorFieldValid(){
+    return this.colorField.touched && this.colorField.valid;
   }
 
   save(event) {
