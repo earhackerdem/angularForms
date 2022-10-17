@@ -4,65 +4,67 @@
   <div formGroupName="fullName">
     <!-- name -->
     <mat-form-field appearance="fill">
-      <mat-label> Name:</mat-label>
+      <mat-label> Nombre:</mat-label>
       <input matInput type="text" formControlName="name" />
       <mat-icon matSuffix *ngIf="isNameFieldValid">done</mat-icon>
       <mat-icon matSuffix *ngIf="isNameFieldInvalid">close</mat-icon>
+      <div class="messages" [class.active]="isNameFieldInvalid">
+        <mat-error *ngIf="nameField.hasError('required')"
+          >Este campo es requerido</mat-error
+        >
+        <mat-error *ngIf="nameField.hasError('pattern')"
+          >No debe tener caracteres especiales</mat-error
+        >
+        <mat-error *ngIf="nameField.hasError('maxlength')"
+          >Este campo debe tener máximo 10 caracteres</mat-error
+        >
+      </div>
     </mat-form-field>
-
-    <div class="messages" [class.active]="isNameFieldInvalid">
-      <mat-error *ngIf="nameField.hasError('required')"
-        >Este campo es requerido</mat-error
-      >
-      <mat-error *ngIf="nameField.hasError('pattern')"
-        >No debe tener caracteres especiales</mat-error
-      >
-      <mat-error *ngIf="nameField.hasError('maxlength')"
-        >Este campo debe tener máximo 10 caracteres</mat-error
-      >
-    </div>
 
     <!-- last name -->
     <mat-form-field appearance="fill">
-      <mat-label>Last name:</mat-label>
+      <mat-label>Apellido:</mat-label>
       <input matInput type="text" formControlName="lastName" />
       <mat-icon matSuffix *ngIf="isLastNameFieldValid">done</mat-icon>
       <mat-icon matSuffix *ngIf="isLastNameFieldInvalid">close</mat-icon>
+
+      <div class="messages" [class.active]="isLastNameFieldInvalid">
+        <mat-error *ngIf="lastNameField.hasError('required')"
+          >Este campo es requerido</mat-error
+        >
+        <mat-error *ngIf="lastNameField.hasError('pattern')"
+          >No debe tener caracteres especiales</mat-error
+        >
+        <mat-error *ngIf="lastNameField.hasError('maxlength')"
+          >Este campo debe tener máximo 10 caracteres</mat-error
+        >
+      </div>
     </mat-form-field>
 
-    <div class="messages" [class.active]="isLastNameFieldInvalid">
-      <mat-error *ngIf="lastNameField.hasError('required')"
-        >Este campo es requerido</mat-error
-      >
-      <mat-error *ngIf="lastNameField.hasError('pattern')"
-        >No debe tener caracteres especiales</mat-error
-      >
-      <mat-error *ngIf="lastNameField.hasError('maxlength')"
-        >Este campo debe tener máximo 10 caracteres</mat-error
-      >
-    </div>
+
   </div>
 
   <!-- newsletter -->
 
   <mat-form-field appearance="fill">
     <mat-label>Newsletter</mat-label>
-    <input matInput type="text" formControlName="newsLetter" />
+    <input matInput type="email" formControlName="newsLetter" />
     <mat-icon matSuffix *ngIf="isNewsLetterFieldValid">done</mat-icon>
     <mat-icon matSuffix *ngIf="isNewsLetterFieldInvalid">close</mat-icon>
+    <div class="messages" [class.active]="isNewsLetterFieldInvalid">
+      <mat-error *ngIf="newsLetterField.hasError('required')"
+        >Este campo es requerido</mat-error
+      >
+      <mat-error *ngIf="newsLetterField.hasError('email')"
+        >Este campo debe ser un email</mat-error
+      >
+      <mat-error *ngIf="newsLetterField.hasError('maxlength')"
+        >Este campo debe tener máximo 10 caracteres</mat-error
+      >
+    </div>
   </mat-form-field>
 
-  <div class="messages" [class.active]="isNewsLetterFieldInvalid">
-    <mat-error *ngIf="newsLetterField.hasError('required')"
-      >Este campo es requerido</mat-error
-    >
-    <mat-error *ngIf="newsLetterField.hasError('email')"
-      >Este campo debe ser un email</mat-error
-    >
-    <mat-error *ngIf="newsLetterField.hasError('maxlength')"
-      >Este campo debe tener máximo 10 caracteres</mat-error
-    >
-  </div>
+
 
   <!-- email -->
 
@@ -71,29 +73,31 @@
     <input matInput type="email" formControlName="email" />
     <mat-icon matSuffix *ngIf="isEmailFieldValid">done</mat-icon>
     <mat-icon matSuffix *ngIf="isEmailFieldInvalid">close</mat-icon>
+    <div class="messages" [class.active]="isEmailFieldInvalid">
+      <mat-error *ngIf="emailField.hasError('required')"
+        >Este campo es requerido</mat-error
+      >
+      <mat-error *ngIf="emailField.hasError('email')"
+        >Introduzca un email valido</mat-error
+      >
+    </div>
   </mat-form-field>
 
-  <div class="messages" [class.active]="isEmailFieldInvalid">
-    <mat-error *ngIf="emailField.hasError('required')"
-      >Este campo es requerido</mat-error
-    >
-    <mat-error *ngIf="emailField.hasError('email')"
-      >Introduzca un email valido</mat-error
-    >
-  </div>
+
 
   <!-- Phone -->
 
   <mat-form-field appearance="fill">
-    <mat-label>Phone</mat-label>
+    <mat-label>Teléfono</mat-label>
     <input matInput type="tel" formControlName="phone" />
     <mat-icon matSuffix *ngIf="isPhoneFieldValid">done</mat-icon>
     <mat-icon matSuffix *ngIf="isPhoneFieldInvalid">close</mat-icon>
+    <div class="messages" [class.active]="isPhoneFieldInvalid">
+      <mat-error *ngIf="phoneField.hasError('required')">Este campo es requerido</mat-error>
+    </div>
+
   </mat-form-field>
 
-  <div class="messages" [class.active]="isPhoneFieldInvalid">
-    <mat-error *ngIf="phoneField.hasError('required')"></mat-error>
-  </div>
 
   <!-- color -->
 
@@ -102,46 +106,47 @@
     <input matInput type="color" formControlName="color" />
     <mat-icon matSuffix *ngIf="isColorFieldValid">done</mat-icon>
     <mat-icon matSuffix *ngIf="isColorFieldInvalid">close</mat-icon>
+    <div class="messages" [class.active]="isColorFieldInvalid">
+      <mat-error *ngIf="colorField.hasError('required')">Este campo es requerido</mat-error>
+    </div>
+
   </mat-form-field>
 
-  <div class="messages" [class.active]="isColorFieldInvalid">
-    <mat-error *ngIf="colorField.hasError('required')"></mat-error>
-  </div>
 
   <!-- date -->
 
   <mat-form-field appearance="fill">
     <mat-label>Fecha</mat-label>
-    <input matInput formControlName="date" [matDatepicker]="picker">
+    <input matInput formControlName="date" [matDatepicker]="picker"/>
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
-
   <!-- age -->
 
   <mat-form-field appearance="fill">
-    <mat-label>Age</mat-label>
+    <mat-label>Edad</mat-label>
     <input matInput type="number" formControlName="age" />
     <mat-icon matSuffix *ngIf="isAgeFieldValid">done</mat-icon>
     <mat-icon matSuffix *ngIf="isAgeFieldInvalid">close</mat-icon>
+    <div class="messages" [class.active]="isAgeFieldInvalid">
+      <mat-error *ngIf="colorField.hasError('required')"
+        >Este campo es requerido</mat-error
+      >
+      <mat-error *ngIf="colorField.hasError('min')"
+        >El usuario debe ser mayor de edad</mat-error
+      >
+      <mat-error *ngIf="colorField.hasError('max')"
+        >El usuario no debe tener mas de 100 años</mat-error
+      >
+    </div>
   </mat-form-field>
 
-  <div class="messages" [class.active]="isAgeFieldInvalid">
-    <mat-error *ngIf="colorField.hasError('required')"
-      >Este campo es requerido</mat-error
-    >
-    <mat-error *ngIf="colorField.hasError('min')"
-      >El usuario debe ser mayor de edad</mat-error
-    >
-    <mat-error *ngIf="colorField.hasError('max')"
-      >El usuario no debe tener mas de 100 años</mat-error
-    >
-  </div>
+
 
   <mat-form-field appearance="fill">
-    <mat-label>Category</mat-label>
+    <mat-label>Categoría</mat-label>
     <mat-select formControlName="category">
       <mat-option value="category-1">Category 1</mat-option>
       <mat-option value="category-2">Category 2</mat-option>
@@ -149,8 +154,6 @@
       <mat-option value="category-4">Category 4</mat-option>
     </mat-select>
   </mat-form-field>
-
-
 
   <mat-form-field appearance="fill">
     <mat-label>Tags</mat-label>
@@ -181,8 +184,6 @@
     <mat-radio-button value="zone-3">Zona 3</mat-radio-button>
   </mat-radio-group>
 
-  <br>
+  <br />
   <button mat-raised-button color="primary" type="submit">Enviar</button>
 </form>
-
-
