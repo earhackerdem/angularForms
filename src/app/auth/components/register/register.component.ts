@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 
 import { AuthService } from './../../../core/services/auth.service';
 
+import { MyValidators } from 'src/app/utils/validators';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -29,16 +31,16 @@ export class RegisterComponent implements OnInit {
     if (this.form.valid) {
       const value = this.form.value;
       this.authService.createUser(value.email, value.password)
-      .then(() => {
-        this.router.navigate(['/auth/login']);
-      });
+        .then(() => {
+          this.router.navigate(['/auth/login']);
+        });
     }
   }
 
   private buildForm() {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6), MyValidators.validPassword]],
     });
   }
 
