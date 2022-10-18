@@ -40,8 +40,6 @@
         >
       </div>
     </mat-form-field>
-
-
   </div>
 
   <!-- newsletter -->
@@ -64,8 +62,6 @@
     </div>
   </mat-form-field>
 
-
-
   <!-- email -->
 
   <mat-form-field appearance="fill">
@@ -83,8 +79,6 @@
     </div>
   </mat-form-field>
 
-
-
   <!-- Phone -->
 
   <mat-form-field appearance="fill">
@@ -93,11 +87,11 @@
     <mat-icon matSuffix *ngIf="isPhoneFieldValid">done</mat-icon>
     <mat-icon matSuffix *ngIf="isPhoneFieldInvalid">close</mat-icon>
     <div class="messages" [class.active]="isPhoneFieldInvalid">
-      <mat-error *ngIf="phoneField.hasError('required')">Este campo es requerido</mat-error>
+      <mat-error *ngIf="phoneField.hasError('required')"
+        >Este campo es requerido</mat-error
+      >
     </div>
-
   </mat-form-field>
-
 
   <!-- color -->
 
@@ -107,17 +101,17 @@
     <mat-icon matSuffix *ngIf="isColorFieldValid">done</mat-icon>
     <mat-icon matSuffix *ngIf="isColorFieldInvalid">close</mat-icon>
     <div class="messages" [class.active]="isColorFieldInvalid">
-      <mat-error *ngIf="colorField.hasError('required')">Este campo es requerido</mat-error>
+      <mat-error *ngIf="colorField.hasError('required')"
+        >Este campo es requerido</mat-error
+      >
     </div>
-
   </mat-form-field>
-
 
   <!-- date -->
 
   <mat-form-field appearance="fill">
     <mat-label>Fecha</mat-label>
-    <input matInput formControlName="date" [matDatepicker]="picker"/>
+    <input matInput formControlName="date" [matDatepicker]="picker" />
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
@@ -143,7 +137,48 @@
     </div>
   </mat-form-field>
 
+  <!-- rango de 0 a 100 inicio -->
 
+  <mat-form-field appearance="fill">
+    <mat-label>Inicio de rango</mat-label>
+    <input matInput type="number" formControlName="inicioRango" />
+    <mat-icon matSuffix *ngIf="isInicioRangoValid">done</mat-icon>
+    <mat-icon matSuffix *ngIf="isInicioRangoInvalid">close</mat-icon>
+    <div class="messages" [class.active]="isInicioRangoInvalid">
+      <mat-error *ngIf="inicioRango.hasError('required')"
+        >Este campo es requerido</mat-error
+      >
+    </div>
+    <div *ngIf="form.errors" >
+      <mat-error *ngIf="form.hasError('invalid_range')"
+      >La diferencia no debe de ser de mas de 100, diferencia actual {{ inicioRango.value - finRango.value }}
+      </mat-error
+    >
+    </div>
+  </mat-form-field>
+
+  <!-- rango de 0 a 100 fin -->
+
+  <mat-form-field appearance="fill">
+    <mat-label>Fin de rango</mat-label>
+    <input matInput type="number" formControlName="finRango" />
+    <mat-icon matSuffix *ngIf="isFinRangoValid">done</mat-icon>
+    <mat-icon matSuffix *ngIf="isFinRangoInvalid">close</mat-icon>
+    <div class="messages" [class.active]="isFinRangoInvalid">
+      <mat-error *ngIf="finRango.hasError('required')"
+        >Este campo es requerido</mat-error
+      >
+    </div>
+    <div *ngIf="form.errors" >
+      <mat-error *ngIf="form.hasError('invalid_range')"
+      >La diferencia no debe de ser de mas de 100, diferencia actual {{ inicioRango.value - finRango.value }}
+      </mat-error
+    >
+    </div>
+
+  </mat-form-field>
+
+  <!-- categoría  -->
 
   <mat-form-field appearance="fill">
     <mat-label>Categoría</mat-label>

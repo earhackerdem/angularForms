@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { MyValidators } from 'src/app/utils/validators';
 @Component({
   selector: 'app-basic-form',
   templateUrl: './basic-form.component.html',
@@ -80,6 +81,30 @@ export class BasicFormComponent implements OnInit {
     return this.form.get('newsLetter');
   }
 
+  get inicioRango() {
+    return this.form.get('inicioRango');
+  }
+
+  get finRango() {
+    return this.form.get('finRango');
+  }
+
+  get isInicioRangoValid() {
+    return this.inicioRango.touched && this.inicioRango.valid;
+  }
+
+  get isInicioRangoInvalid() {
+    return this.inicioRango.touched && this.inicioRango.invalid;
+  }
+
+  get isFinRangoValid() {
+    return this.finRango.touched && this.finRango.valid;
+  }
+
+  get isFinRangoInvalid() {
+    return this.finRango.touched && this.finRango.invalid;
+  }
+
   get isNameFieldValid() {
     return this.nameField.touched && this.nameField.valid;
   }
@@ -128,11 +153,11 @@ export class BasicFormComponent implements OnInit {
     return this.lastNameField.touched && this.lastNameField.valid;
   }
 
-  get isColorFieldInvalid(){
+  get isColorFieldInvalid() {
     return this.colorField.touched && this.colorField.invalid;
   }
 
-  get isColorFieldValid(){
+  get isColorFieldValid() {
     return this.colorField.touched && this.colorField.valid;
   }
 
@@ -162,8 +187,12 @@ export class BasicFormComponent implements OnInit {
       gender: [''],
       zone: [''],
       preferences: [''],
-      newsLetter: ['', [Validators.required, Validators.email]]
+      newsLetter: ['', [Validators.required, Validators.email]],
+      inicioRango: ['', [Validators.required]],
+      finRango: ['', [Validators.required]],
 
+    }, {
+      validators: MyValidators.validRange
     });
   }
 
