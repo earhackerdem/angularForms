@@ -22,8 +22,6 @@ export class MyValidators {
   static matchPasswords(control: AbstractControl) {
     const password = control.get('password').value;
     const confirmPassword = control.get('confirmPassword').value;
-    console.log(password)
-    console.log(confirmPassword)
     if (password === confirmPassword) {
       return null;
 
